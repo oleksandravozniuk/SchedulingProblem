@@ -1,0 +1,26 @@
+﻿@model SchedulingProblem.Models.ConfigurationViewModel
+@{
+    ViewData["Title"] = "Determined Problem";
+}
+
+
+<h1>Determined Problem</h1>
+
+<h4>Select the way to input data</h4>
+
+@using (Html.BeginForm())
+{
+    foreach (var inputType in Model.InputTypes)
+    {
+        @Html.RadioButtonFor(m => m.SelectedInputType, inputType)@inputType
+        <br />
+    }
+    <br />
+
+
+
+    <input type="submit" value="Submit" />
+
+
+}
+
