@@ -1,0 +1,142 @@
+﻿@using SchedulingProblem.Models;
+@model ManualInputViewModel
+@{
+    ViewData["Title"] = "ManualInput";
+}
+
+<div style="width:100%;padding: 30px;">
+    <div style="width:50%; height:600px;float: left ; padding: 50px; background-color: #BCC6CC; display: inline-block;border-radius:10px;">
+        <h3>Manual Input</h3>
+        <br />
+        <h6>Number of elements: @Model.NumberOfElements</h6>
+        @Html.HiddenFor(m => m.NumberOfElements);
+        @using (Html.BeginForm())
+        {
+
+            <table>
+                <td>
+                    @for (int row = 0; row < Model.NumberOfElements; row++)
+                    {
+
+                    <tr> @Html.TextBoxFor(x => x.Schedule.operations[row].Deadline)</tr>
+                    <tr> @Html.TextBoxFor(x => x.Schedule.operations[row].Penalty)</tr>
+                }
+                    </td>
+
+                </table>
+
+
+                <input type="submit" asp-route-myMethod="OK" value="OK" />
+            }
+
+
+    </div>
+
+    <div style="width:50%;padding: 50px; float: right; display: inline-block; height: 600px;background-color: #E5E4E2;border-radius: 10px;">
+        <h3>Random Output</h3>
+        <br />
+        <div>
+            <span>-Id--------</span>
+            <span>--------Deadline--------</span>
+            <span>--------Penalty--------</span>
+        </div>
+        <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+            @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.Schedule)
+        </div>
+
+    </div>
+
+
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Solutions</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <h3>Algorithm 1</h3>
+            <p>Упорядкувати роботи по незростанню штрафів</p>
+            <br />
+            <div>
+                <span>-Id----------</span>
+                <span>----------Deadline----------</span>
+                <span>----------Penalty----------</span>
+            </div>
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo1(Model.Schedule))
+            </div>
+        </div>
+        <div class="col-sm">
+            <h3>Algorithm 2</h3>
+            <p>Упорядкувати роботи по неспаданню директивних строків</p>
+            <br />
+            <div>
+                <span>-Id----------</span>
+                <span>----------Deadline----------</span>
+                <span>----------Penalty----------</span>
+            </div>
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo2(Model.Schedule))
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm">
+            <h3>Algorithm 3</h3>
+            <p>Упорядкувати роботи по принципу: спочатку обираємо ті роботи, директивний строк яких на наступному кроці завершується, інакше упорядковуємо роботи по незростанню штрафів</p>
+            <br />
+            <div>
+                <span>-Id----------</span>
+                <span>----------Deadline----------</span>
+                <span>----------Penalty----------</span>
+            </div>
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo3(Model.Schedule))
+            </div>
+        </div>
+        <div class="col-sm">
+            <h3>Algorithm 4</h3>
+            <p>Упорядкувати роботи по незростанню відношень штрафів до дедлайнів</p>
+            <br />
+            <div>
+                <span>-Id----------</span>
+                <span>----------Deadline----------</span>
+                <span>----------Penalty----------</span>
+            </div>
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo4(Model.Schedule))
+            </div>
+        </div>
+
+    </div>
+</div>
+

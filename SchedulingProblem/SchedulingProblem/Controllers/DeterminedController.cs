@@ -11,90 +11,24 @@ namespace SchedulingProblem.Controllers
 {
     public class DeterminedController : Controller
     {
-        private readonly ILogger<DeterminedController> _logger;
 
-        public DeterminedController(ILogger<DeterminedController> logger)
+
+        public DeterminedController()
         {
-            _logger = logger;
+
         }
 
-        [HttpGet]
-        public IActionResult Determined()
-        {
-            ConfigurationViewModel company = new ConfigurationViewModel();
-            return View(company);
-        }
-
-        [HttpPost]
-        public IActionResult Determined(ConfigurationViewModel configuration)
-        {
-            if (string.IsNullOrEmpty(configuration.SelectedInputType))
-            {
-                return RedirectToAction("Error");
-            }
-            else
-            {
-                var k = configuration.SelectedInputType;
-                switch (k)
-                {
-                    case "Random": return RedirectToAction("RandomInput", new RandomInputViewModel());
-                    case "Manually": return RedirectToAction("RandomInput");
-                    case "FromFile": return RedirectToAction("RandomInput");
-                }
-                return RedirectToAction("Error");
-                // return "You have chosen to input data" + configuration.SelectedInputType;
-            }
-        }
+      
 
 
         [HttpGet]
-        public IActionResult RandomOutput(RandomInputViewModel randomInputView)
+        public IActionResult ScheduleOutput(ScheduleViewModel schedule)
         {
-            return PartialView("RandomOutput", randomInputView);
-        }
-
-        [HttpGet]
-        public IActionResult RandomAlgo1(RandomInputViewModel randomInputView)
-        {
-            return PartialView("RandomAlgo1", randomInputView);
+            return PartialView("RandomAlgo", schedule);
         }
 
 
-        [HttpGet]
-        public IActionResult RandomAlgo2(RandomInputViewModel randomInputView)
-        {
-            return PartialView("RandomAlgo2", randomInputView);
-        }
-
-
-        [HttpGet]
-        public IActionResult RandomAlgo3(RandomInputViewModel randomInputView)
-        {
-            return PartialView("RandomAlgo3", randomInputView);
-        }
-
-        [HttpGet]
-        public IActionResult RandomInput(RandomInputViewModel randomInputView)
-        {
-            return View("RandomInput", randomInputView);
-        }
-
-        [HttpPost]
-        public IActionResult RandomInput(RandomInputViewModel configuration, [FromQuery] string myMethod = null)
-        {
-            //if (configuration.NumberOfElements==0 || configuration.NumberOfElements*(-1) == configuration.NumberOfElements)
-            //{
-            //    return RedirectToAction("Error");
-            //}
-            //else
-            //{
-            if (myMethod == "Update")
-                return View("RandomInput", configuration);
-            else
-                return PartialView("RandomOutput",configuration);
-                // return "You have chosen to input data" + configuration.SelectedInputType;
-            //}
-        }
+       
 
         public IActionResult Undetermined()
         {

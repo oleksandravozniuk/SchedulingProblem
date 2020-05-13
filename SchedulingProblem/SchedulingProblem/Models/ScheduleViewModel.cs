@@ -31,5 +31,10 @@ namespace SchedulingProblem.Models
             }
             return result;
         }
+
+        public ScheduleViewModel()
+        {
+
+        }
     }
 }

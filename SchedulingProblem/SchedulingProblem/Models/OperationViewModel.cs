@@ -7,9 +7,14 @@ namespace SchedulingProblem.Models
 {
     public class OperationViewModel
     {
-        public string Id { get; set; }
-        public int Deadline { get; set; }
+        public int Id { get; set; }
+        public int Deadline { get; set; } = 1;
         public int Penalty { get; set; }
+
+        public OperationViewModel()
+        {
+
+        }
 
     }
 }

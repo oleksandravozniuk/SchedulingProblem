@@ -46,7 +46,7 @@ namespace SchedulingProblem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Determined}/{action=Determined}/{id?}");
+                    pattern: "{controller=DataReader}/{action=DataReaderConfig}/{id?}");
             });
         }
     }

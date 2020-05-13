@@ -9,7 +9,6 @@ C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProble
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\SchedulingProblem.pdb
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\SchedulingProblem.Views.dll
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\SchedulingProblem.Views.pdb
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\SchedulingProblem.csprojAssemblyReference.cache
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\staticwebassets\SchedulingProblem.StaticWebAssets.Manifest.cache
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\staticwebassets\SchedulingProblem.StaticWebAssets.xml
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\SchedulingProblem.RazorAssemblyInfo.cache
@@ -103,11 +102,12 @@ C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProble
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\AlgoOutputs\ScheduleOutput.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\DataReaderConfig.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\RandomInput.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\Undetermined.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\SchedulingProblem.csprojAssemblyReference.cache
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\FileInput.cshtml.g.cs
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\SchedulingProblem.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\Determined.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\Undetermined.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\RandomInput.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\RandomOutput.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\RandomAlgo1.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\RandomAlgo2.cshtml.g.cs
-C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\RandomAlgo3.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\ManualInput.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\DataReader\NumInput.cshtml.g.cs

@@ -1,0 +1,19 @@
+﻿@using SchedulingProblem.Models;
+@model ScheduleViewModel
+
+
+<br />
+<table class="table">
+
+    @foreach (var operation in Model.operations)
+    {
+        <tr>
+            <td><p>@operation.Id</p></td>
+            <td><p>@operation.Deadline</p></td>
+            <td><p>@operation.Penalty</p></td>
+        </tr>
+    }
+
+
+</table>
+<tr>Summary Penalty: @Model.SummmaryPenalty</tr>
