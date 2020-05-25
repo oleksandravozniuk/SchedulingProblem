@@ -17,33 +17,46 @@ namespace SchedulingProblem.Models
 
         public int NumberOfElements { get; set; }
 
-        public ScheduleViewModel Schedule = new ScheduleViewModel();
+        public int NumberOfPenalties { get; set; }
+
+        public List<ScheduleViewModel> Schedule = new List<ScheduleViewModel>();
 
         public AlgoGenerator AlgoGenerator = new AlgoGenerator();
 
         public RandomInputViewModel()
         {
-            if(Schedule.operations.Count==0 && NumberOfElements==0)
-            {
-                Schedule = MakeSchedule();
-            }
+            //if(Schedule[0].operations.Count==0 && NumberOfElements==0)
+            //{
+            //    Schedule = MakeSchedule();
+            //}
         }
 
        
 
-        public ScheduleViewModel MakeSchedule()
+        public List<ScheduleViewModel> MakeSchedule()
         {
-            ScheduleViewModel schedule = new ScheduleViewModel();
+            List<ScheduleViewModel> schedule = new List<ScheduleViewModel>();
+            List<int> deadlines = new List<int>();
             var rand = new Random();
 
-            for(int i=0;i<NumberOfElements;i++)
+            for (int i=0;i<NumberOfElements;i++)
             {
-                var deadline = rand.Next(PenaltyFrom, PenaltyTo);
-                var penalty = rand.Next(DeadlineFrom, DeadlineTo);
-
-                schedule.operations.Add(new OperationViewModel() { Id = i+1, Deadline = deadline, Penalty = penalty});
+                deadlines.Add(rand.Next(DeadlineFrom, DeadlineTo));
             }
 
+            for(int j=0;j<NumberOfPenalties;j++)
+            {
+                schedule.Add(new ScheduleViewModel());
+
+                for (int i = 0; i < NumberOfElements; i++)
+                {
+                    var penalty = rand.Next(PenaltyFrom, PenaltyTo);
+
+                    schedule[j].operations.Add(new OperationViewModel() { Id = i + 1, Deadline = deadlines[i], Penalty = penalty });
+                }
+            }
+            
+           
             return schedule;
         }
 

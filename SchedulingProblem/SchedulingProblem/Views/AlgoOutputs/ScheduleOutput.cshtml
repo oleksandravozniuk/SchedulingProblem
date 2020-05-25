@@ -3,17 +3,24 @@
 
 
 <br />
-<table class="table">
+<div style="width:455px;">
+    <div>
+        <span>-Id--------</span>
+        <span>--------Deadline--------</span>
+        <span>--------Penalty--------</span>
+    </div>
+    <table class="table">
 
-    @foreach (var operation in Model.operations)
-    {
-        <tr>
-            <td><p>@operation.Id</p></td>
-            <td><p>@operation.Deadline</p></td>
-            <td><p>@operation.Penalty</p></td>
-        </tr>
-    }
+        @foreach (var operation in Model.operations)
+        {
+            <tr>
+                <td><p>@operation.Id</p></td>
+                <td><p>@operation.Deadline</p></td>
+                <td><p>@operation.Penalty</p></td>
+            </tr>
+        }
 
 
-</table>
-<tr>Summary Penalty: @Model.SummmaryPenalty</tr>
+    </table>
+    <tr>Summary Penalty: @Model.SummmaryPenalty</tr>
+</div>

@@ -1,0 +1,36 @@
+﻿@using SchedulingProblem.Models;
+@model List<OperationViewModel>
+@{
+    ViewData["Title"] = "ScheduleInput";
+}
+
+
+@using (Html.BeginForm("ScheduleInput", "Determined", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col">
+           Deadline
+        </div>
+        <div class="col">
+           Penalty
+        </div>
+    </div>
+    <div style="overflow-y:scroll; overflow-x:hidden; height:350px;">
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+
+            <div class="row">
+                <div class="col">
+                    @Html.TextBoxFor(x => Model[i].Deadline, new { @class = "form-control" })
+                </div>
+                <div class="col">
+                    @Html.TextBoxFor(x => Model[i].Penalty, new { @class = "form-control" })
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+}

@@ -7,8 +7,9 @@ namespace SchedulingProblem.Models
 {
     public class FileInputViewModel
     {
-        public ScheduleViewModel Schedule = new ScheduleViewModel();
+        public List<ScheduleViewModel> Schedule = new List<ScheduleViewModel>();
 
         public AlgoGenerator AlgoGenerator = new AlgoGenerator();
+        public int NumberOfPenalties { get; set; }
     }
 }

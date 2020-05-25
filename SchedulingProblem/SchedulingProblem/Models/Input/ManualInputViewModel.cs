@@ -9,8 +9,12 @@ namespace SchedulingProblem.Models
     {
         public int NumberOfElements { get; set; }
 
-        public ScheduleViewModel Schedule = new ScheduleViewModel();
+        public List<ScheduleViewModel> Schedule = new List<ScheduleViewModel>();
 
         public AlgoGenerator AlgoGenerator = new AlgoGenerator();
+
+        public List<int> manualList = new List<int>();
+
+        public int NumberOfPenalties { get; set; }
     }
 }

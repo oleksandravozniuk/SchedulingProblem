@@ -85,8 +85,8 @@ namespace SchedulingProblem.Models
 
         public ScheduleViewModel MakeAlgo4(ScheduleViewModel schedule)
         {
-            //var o = schedule.operations.OrderByDescending(p => (double)(p.Penalty/p.Deadline));
-            var o = schedule.operations.OrderBy(p => p.Deadline);
+            var o = schedule.operations.OrderByDescending(p => (double)(p.Penalty/p.Deadline));
+           // var o = schedule.operations.OrderBy(p => p.Deadline);
             var s = new ScheduleViewModel()
             {
                 operations = o.ToList()

@@ -34,7 +34,7 @@ namespace SchedulingProblem
             }
             else
             {
-                app.UseExceptionHandler("/Determined/Error");
+                app.UseExceptionHandler("/Error/Error");
             }
             app.UseStaticFiles();
 
@@ -46,7 +46,7 @@ namespace SchedulingProblem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=DataReader}/{action=DataReaderConfig}/{id?}");
+                    pattern: "{controller=Determined}/{action=DataReaderConfig}/{id?}");
             });
         }
     }
