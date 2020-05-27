@@ -34,7 +34,7 @@ namespace SchedulingProblem.Controllers
         {
             if (string.IsNullOrEmpty(configuration.SelectedInputType))
             {
-                return RedirectToAction("Error");
+                return View("Error", "You have selected nothing" );
             }
             else
             {
@@ -71,6 +71,11 @@ namespace SchedulingProblem.Controllers
         // [Route("api/RandomInput")]
         public IActionResult RandomInput(RandomInputViewModel configuration, [FromQuery] string myMethod = null)
         {
+            if(configuration.DeadlineFrom<=0 || configuration.DeadlineTo<=0 || configuration.PenaltyFrom<=0 || 
+                configuration.PenaltyTo<=0 || configuration.NumberOfElements<=0 || configuration.NumberOfPenalties<=0)
+            {
+                return View("Error", "All values must not be 0 or negative");
+            }
             configuration.NumberOfPenalties = 1;
             configuration.Schedule = configuration.MakeSchedule();
            
@@ -88,6 +93,11 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public ActionResult FileInput(IFormFile postedFile)
         {
+            if (postedFile == null)
+            {
+                return View("Error", "You have not chosen a file");
+            }
+
             _ = this.Environment.WebRootPath;
             _ = this.Environment.ContentRootPath;
 
@@ -143,6 +153,10 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult NumInput(int numOfElements)
         {
+            if (numOfElements <= 0)
+            {
+                return View("Error", "The number of elements cannot be 0 or negative");
+            }
             ManualInputViewModel manual = new ManualInputViewModel
             {
                 NumberOfElements = numOfElements,
@@ -181,7 +195,12 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult ScheduleInput(List<OperationViewModel> operations, [FromQuery] string myMethod = null)
         {
+            for(int i=0;i<operations.Count;i++)
+            {
+                if(operations[i].Deadline<=0 || operations[i].Penalty<=0)
+                        return View("Error", "Deadlines or Penalties cannot be 0 or negative");
 
+            }
             ManualInputViewModel manual = new ManualInputViewModel
             {
                 NumberOfElements = operations.Count,
@@ -193,12 +212,6 @@ namespace SchedulingProblem.Controllers
 
             return View("ManualInput", manual);
         }
-
-        public IActionResult Undetermined()
-        {
-            return View();
-        }
-
 
     }
 }

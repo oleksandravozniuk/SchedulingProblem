@@ -1,5 +1,5 @@
 ﻿@using SchedulingProblem.Models;
-@model ManualInputViewModel
+@model List<int>
 @{
     ViewData["Title"] = "ScheduleInput";
 }
@@ -18,24 +18,24 @@
     <div style="overflow-y:auto; overflow-x:auto; height:350px;">
 
 
-        @for (int i = 0, k = 0; i < Model.NumberOfElements; i++)
+        @for (int i = 0, k = 0; i < Model[Model.Count - 2]; i++)
         {
 
-            <div class="row">
-                @for (int j = 0; j < Model.NumberOfPenalties + 1; j++, k++)
-                {
-                    <div class="col">
-                        @Html.TextBoxFor(x => Model.manualList[k], new { @class = "form-control" })
-                    </div>
-                }
-            </div>
-
+        <div class="row">
+            @for (int j = 0; j < Model[Model.Count - 1] + 1; j++, k++)
+            {
+               
+                <div class="col" style=" width:30px;">
+                    @Html.TextBoxFor(x => Model[k])
+                </div>
+            }
+        </div>
+            @if (i == Model[Model.Count - 2] - 1)
+            {
+                @Html.HiddenFor(x => Model[Model.Count - 2]);
+                @Html.HiddenFor(x => Model[Model.Count - 1]);
+            }
         }
-        @Html.HiddenFor(m => m.manualList, new { @class="form-control"});
-
-        @Html.HiddenFor(m => m.NumberOfElements);
-
-        @Html.HiddenFor(m => m.NumberOfPenalties);
 
     </div>
 

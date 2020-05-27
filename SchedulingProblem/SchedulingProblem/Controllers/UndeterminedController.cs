@@ -15,9 +15,6 @@ namespace SchedulingProblem.Controllers
     {
         private IWebHostEnvironment Environment;
 
-        public int Penalties { get; set; }
-        public int Elements { get; set; }
-
         public UndeterminedController(IWebHostEnvironment _environment)
         {
             Environment = _environment;
@@ -35,7 +32,7 @@ namespace SchedulingProblem.Controllers
         {
             if (string.IsNullOrEmpty(configuration.SelectedInputType))
             {
-                return RedirectToAction("Error");
+                return View("Error", "You have selected nothing");
             }
             else
             {
@@ -51,7 +48,7 @@ namespace SchedulingProblem.Controllers
                     default:
                         break;
                 }
-                return RedirectToAction("Error");
+                return View("Error", "You have selected nothing");
 
             }
         }
@@ -66,6 +63,11 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult RandomInput(RandomInputViewModel configuration, [FromQuery] string myMethod = null)
         {
+            if (configuration.DeadlineFrom <= 0 || configuration.DeadlineTo <= 0 || configuration.PenaltyFrom <= 0 ||
+               configuration.PenaltyTo <= 0 || configuration.NumberOfElements <= 0 || configuration.NumberOfPenalties <= 0)
+            {
+                return View("Error", "All values must not be 0 or negative");
+            }
             configuration.Schedule = configuration.MakeSchedule();
 
 
@@ -83,6 +85,14 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public ActionResult FileInput(IFormFile postedFile, int numOfPenalties)
         {
+            if(postedFile==null)
+            {
+                return View("Error", "You have not chosen a file");
+            }
+            if(numOfPenalties<=0)
+            {
+                return View("Error", "The number of schedules cannot be 0 or negative");
+            }
             _ = this.Environment.WebRootPath;
             _ = this.Environment.ContentRootPath;
 
@@ -147,17 +157,16 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult NumInput(int numOfElements, int numOfPenalties)
         {
+            if (numOfPenalties <= 0 || numOfElements<=0)
+            {
+                return View("Error", "The number of schedules or elements cannot be 0 or negative");
+            }
             ManualInputViewModel manual = new ManualInputViewModel
             {
                 NumberOfElements = numOfElements,
                 NumberOfPenalties = numOfPenalties,
                 Schedule = new List<ScheduleViewModel>()
             };
-
-            //for(int i=0;i<numOfPenalties;i++)
-            //{
-            //    manual.Schedule.Add(new ScheduleViewModel());
-            //}
 
             return RedirectToAction("ManualInput", manual);
 
@@ -167,7 +176,7 @@ namespace SchedulingProblem.Controllers
         [HttpGet]
         public IActionResult ManualInput(ManualInputViewModel manual)
         {
-
+          
             List<OperationViewModel> operations = new List<OperationViewModel>();
 
             for (int i = 0; i < manual.NumberOfElements; i++)
@@ -180,8 +189,7 @@ namespace SchedulingProblem.Controllers
 
             ManualInputViewModel manualInput = new ManualInputViewModel()
             {
-                NumberOfElements = manual.NumberOfElements,
-                NumberOfPenalties = manual.NumberOfPenalties,
+              
                 Schedule = schedules
             };
 
@@ -190,8 +198,8 @@ namespace SchedulingProblem.Controllers
                 manualInput.manualList.Add(0);
             }
 
-            Penalties = manualInput.NumberOfPenalties;
-            Elements = manualInput.NumberOfElements;
+            manualInput.manualList.Add(manual.NumberOfElements);
+            manualInput.manualList.Add(manual.NumberOfPenalties);
 
             return View("ManualInput", manualInput);
         }
@@ -199,21 +207,30 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult ScheduleInput(List<int> list, [FromQuery] string myMethod = null)
         {
+            for(int i=0;i<list.Count;i++)
+            {
+                if(list[i]<=0)
+                    return View("Error", "Cells cannot be 0 or negative");
+            }
+
+            int numOfElements = list[list.Count - 2];
+            int numOfPenalties = list[list.Count - 1];
+
             ManualInputViewModel manualInput = new ManualInputViewModel
             {
-                NumberOfElements = Elements,
-                NumberOfPenalties = Penalties,
+                NumberOfElements = numOfElements,
+                NumberOfPenalties = numOfPenalties,
                 Schedule = new List<ScheduleViewModel>(),
                 manualList = list
             };
 
           //  manual.Schedule.Add(new ScheduleViewModel() { operations = operations });
 
-            for (int j = 0; j < Penalties; j++)
+            for (int j = 0; j < numOfPenalties; j++)
             {
                 manualInput.Schedule.Add(new ScheduleViewModel());
                 int id = 1;
-                for (int i = 0; i < list.Count; i += Penalties + 1)
+                for (int i = 0; i < list.Count-2; i += numOfPenalties + 1)
                 {
                     manualInput.Schedule[j].operations.Add(new OperationViewModel() { Id = id++, Deadline = list[i], Penalty = list[i + (j + 1)] });
                 }

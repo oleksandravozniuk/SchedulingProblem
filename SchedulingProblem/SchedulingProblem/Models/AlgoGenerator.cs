@@ -94,5 +94,66 @@ namespace SchedulingProblem.Models
             return s;
         }
 
+        public List<ScheduleViewModel> SummaryScheduleResult(List<ScheduleViewModel> schedules)
+        {
+            List<int> summaryPenalties = new List<int>();
+            
+            for(int i=0;i<schedules[0].operations.Count;i++)
+            {
+                int penalty = 0;
+                for(int j=0;j<schedules.Count;j++)
+                {
+                    penalty += FindPenaltyByOperationId(schedules[j], i+1);
+                }
+                summaryPenalties.Add(penalty);
+            }
+
+            List<int> deadlines = new List<int>();
+            List<OperationViewModel> operations = new List<OperationViewModel>();
+            operations = schedules[0].operations;
+            operations.OrderBy(p => p.Id);
+
+            for(int i=0;i<operations.Count;i++)
+            {
+                deadlines.Add(operations[i].Deadline);
+            }
+
+            List<OperationViewModel> startOperations = new List<OperationViewModel>();
+            for(int i=0;i<operations.Count;i++)
+            {
+                startOperations.Add(new OperationViewModel
+                {
+                    Id = i+1,
+                    Penalty = summaryPenalties[i],
+                    Deadline = deadlines[i]
+                });
+            }
+
+            ScheduleViewModel startSunnarySchedule = new ScheduleViewModel()
+            {
+                operations = startOperations
+            };
+
+            List<ScheduleViewModel> resultSchedules = new List<ScheduleViewModel>();
+            resultSchedules.Add(MakeAlgo1(startSunnarySchedule));
+            resultSchedules.Add(MakeAlgo2(startSunnarySchedule));
+            resultSchedules.Add(MakeAlgo3(startSunnarySchedule));
+            resultSchedules.Add(MakeAlgo4(startSunnarySchedule));
+
+            return resultSchedules;
+        }
+
+        public int FindPenaltyByOperationId(ScheduleViewModel schedule, int id)
+        {
+            for(int i=0;i<schedule.operations.Count;i++)
+            {
+                if(id == schedule.operations[i].Id)
+                {
+                    return schedule.operations[i].Penalty;
+                }
+            }
+            return 0;
+        }
+
     }
 }
