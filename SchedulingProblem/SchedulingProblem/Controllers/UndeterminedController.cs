@@ -64,9 +64,15 @@ namespace SchedulingProblem.Controllers
         public IActionResult RandomInput(RandomInputViewModel configuration, [FromQuery] string myMethod = null)
         {
             if (configuration.DeadlineFrom <= 0 || configuration.DeadlineTo <= 0 || configuration.PenaltyFrom <= 0 ||
-               configuration.PenaltyTo <= 0 || configuration.NumberOfElements <= 0 || configuration.NumberOfPenalties <= 0)
+               configuration.PenaltyTo <= 0 || configuration.NumberOfElements <= 0 || configuration.NumberOfPenalties <= 0 ||
+                configuration.DeadlineFrom.GetType() != typeof(int) || configuration.DeadlineTo.GetType()!=typeof(int) ||
+                    configuration.PenaltyFrom.GetType()!=typeof(int) || configuration.PenaltyTo.GetType() != typeof(int) ||
+                        configuration.NumberOfElements.GetType()!=typeof(int) || configuration.NumberOfPenalties.GetType()!=typeof(int) || 
+                        configuration.DeadlineFrom > configuration.DeadlineTo ||
+                            configuration.PenaltyFrom > configuration.PenaltyTo)
             {
-                return View("Error", "All values must not be 0 or negative");
+                return View("Error", "All values must not be 0 or negative or not integer, also min bound of random value must be greater than max bound");
+
             }
             configuration.Schedule = configuration.MakeSchedule();
 
@@ -89,9 +95,9 @@ namespace SchedulingProblem.Controllers
             {
                 return View("Error", "You have not chosen a file");
             }
-            if(numOfPenalties<=0)
+            if(numOfPenalties<=0 || numOfPenalties.GetType()!=typeof(int))
             {
-                return View("Error", "The number of schedules cannot be 0 or negative");
+                return View("Error", "The number of schedules cannot be 0 or negative or not integer");
             }
             _ = this.Environment.WebRootPath;
             _ = this.Environment.ContentRootPath;
@@ -122,7 +128,14 @@ namespace SchedulingProblem.Controllers
                         string[] arr = line.Trim().Split(',', ' ');
                         foreach (var item in arr)
                         {
-                            list.Add(Convert.ToInt32(item));
+                            try
+                            {
+                                list.Add(Convert.ToInt32(item));
+                            }
+                            catch (Exception ex)
+                            {
+                                return View("Error", "All values must not be 0 or negative or not integer");
+                            }
                         }
                     }
                 }
@@ -157,9 +170,9 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult NumInput(int numOfElements, int numOfPenalties)
         {
-            if (numOfPenalties <= 0 || numOfElements<=0)
+            if (numOfPenalties <= 0 || numOfElements<=0 || numOfPenalties.GetType()!=typeof(int) || numOfElements.GetType()!=typeof(int))
             {
-                return View("Error", "The number of schedules or elements cannot be 0 or negative");
+                return View("Error", "The number of schedules cannot be 0 or negative or not integer");
             }
             ManualInputViewModel manual = new ManualInputViewModel
             {
@@ -209,8 +222,8 @@ namespace SchedulingProblem.Controllers
         {
             for(int i=0;i<list.Count;i++)
             {
-                if(list[i]<=0)
-                    return View("Error", "Cells cannot be 0 or negative");
+                if(list[i]<=0 || list[i].GetType()!=typeof(int))
+                    return View("Error", "Cells cannot be 0 or negative or integer");
             }
 
             int numOfElements = list[list.Count - 2];

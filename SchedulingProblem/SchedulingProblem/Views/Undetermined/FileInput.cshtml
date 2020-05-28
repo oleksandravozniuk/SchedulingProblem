@@ -19,7 +19,7 @@
             <br />
             <span style="color:green">@Html.Raw(ViewBag.Message)</span>
         </form>
-      
+
     </div>
 
     <div style="width:50%;padding: 50px; float: right; display: inline-block; height: 600px;background-color: #E5E4E2;border-radius: 10px;">
@@ -141,4 +141,146 @@
         </div>
 
     </div>
+</div>
+
+
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Solutions for the summary schedule</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <h3>Algorithm 1</h3>
+            <p>Упорядкувати роботи по незростанню штрафів</p>
+            <br />
+
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @if (Model.NumberOfPenalties > 0)
+                {
+                    @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.SummaryScheduleResult(Model.Schedule)[0])
+                }
+            </div>
+        </div>
+        <div class="col-sm">
+            <h3>Algorithm 2</h3>
+            <p>Упорядкувати роботи по неспаданню директивних строків</p>
+            <br />
+
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @if (Model.NumberOfPenalties > 0)
+                {
+                    @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.SummaryScheduleResult(Model.Schedule)[1])
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm">
+            <h3>Algorithm 3</h3>
+            <p>Упорядкувати роботи по принципу: спочатку обираємо ті роботи, директивний строк яких на наступному кроці завершується, інакше упорядковуємо роботи по незростанню штрафів</p>
+            <br />
+
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @if (Model.NumberOfPenalties > 0)
+                {
+                    @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.SummaryScheduleResult(Model.Schedule)[2])
+                }
+            </div>
+        </div>
+        <div class="col-sm">
+            <h3>Algorithm 4</h3>
+            <p>Упорядкувати роботи по незростанню відношень штрафів до дедлайнів</p>
+            <br />
+
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px; ">
+                @if (Model.NumberOfPenalties > 0)
+                {
+                    @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.SummaryScheduleResult(Model.Schedule)[3])
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Best Schedules</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <br />
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+                @for (int i = 0; i < Model.NumberOfPenalties + 1; i++)
+                {
+                    <div>
+                        @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.BestSchedules(Model.Schedule)[i])
+                    </div>
+
+                    <br />
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Result</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <br />
+            <h3>Deltas</h3>
+            <p>Рядки - розклади, стовпці - критерії (штрафи), останній стовпець - сума дельт по рядку.</p>
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+
+
+                <div>
+                    @if (Model.NumberOfPenalties > 0)
+                    {
+                        @await Html.PartialAsync("~/Views/Undetermined/DeltaView.cshtml", Model.AlgoGenerator.Deltas(Model.AlgoGenerator.BestSchedules(Model.Schedule)))
+                    }
+                </div>
+
+                <br />
+
+            </div>
+
+        </div>
+
+        @*<div class="col-sm">
+            <br />
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+
+                @for (int i = 0; i < Model.NumberOfPenalties; i++)
+                {
+                    <div>@await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.Schedule[i]);</div>
+                    <br />
+                }
+            </div>
+
+            <br />
+        </div>*@
+
+    </div>
+       
 </div>

@@ -200,3 +200,70 @@
 
     </div>
 </div>
+
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Best Schedules</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <br />
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+                @for (int i = 0; i < Model.NumberOfPenalties + 1; i++)
+                {
+                    <div>
+                        @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.BestSchedules(Model.Schedule)[i])
+                    </div>
+
+                    <br />
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Result</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <br />
+            <h3>Deltas</h3>
+            <p>Рядки - розклади. стовпці - критерії (останній стовпець сумарне значення дельти по розкладу).</p>
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+
+
+                <div>
+                    @await Html.PartialAsync("~/Views/Undetermined/DeltaView.cshtml", Model.AlgoGenerator.Deltas(Model.AlgoGenerator.BestSchedules(Model.Schedule)))
+                </div>
+
+                <br />
+
+            </div>
+
+        </div>
+        @*<div class="col-sm">
+            <br />
+                    <div>
+                        @await Html.PartialAsync("~/Views/Undetermined/Answer.cshtml", Model.AlgoGenerator.Answer(Model.AlgoGenerator.Deltas(Model.AlgoGenerator.BestSchedules(Model.Schedule)),Model.AlgoGenerator.BestSchedules(Model.Schedule)))
+                    </div>
+
+                    <br />
+        </div>*@
+
+    </div>
+</div>

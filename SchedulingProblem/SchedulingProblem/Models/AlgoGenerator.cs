@@ -155,5 +155,133 @@ namespace SchedulingProblem.Models
             return 0;
         }
 
+        public List<ScheduleViewModel> BestSchedules(List<ScheduleViewModel> schedules)
+        {
+            List<ScheduleViewModel> bestSchedules = new List<ScheduleViewModel>();
+
+            for(int i=0;i<schedules.Count;i++)
+            {
+                List<ScheduleViewModel> resultSchedule = new List<ScheduleViewModel>();
+                resultSchedule.Add(MakeAlgo1(schedules[i]));
+                resultSchedule.Add(MakeAlgo2(schedules[i]));
+                resultSchedule.Add(MakeAlgo3(schedules[i]));
+                resultSchedule.Add(MakeAlgo4(schedules[i]));
+                bestSchedules.Add(resultSchedule.OrderBy(p => p.SummmaryPenalty).First());
+            }
+
+            var summarySchedule = SummaryScheduleResult(schedules);
+            bestSchedules.Add(summarySchedule.OrderBy(p => p.SummmaryPenalty).First());
+
+            return bestSchedules;
+
+        }
+
+        public List<List<int>> Deltas(List<ScheduleViewModel> bestSchedules)
+        {
+            List<int> sumPenalties = new List<int>();
+            for(int i=0;i<bestSchedules.Count;i++)
+            {
+                sumPenalties.Add(bestSchedules[i].SummmaryPenalty);
+            }
+
+            List<List<int>> deltas = new List<List<int>>();
+
+            List<List<int>> penalties = new List<List<int>>();
+
+            for(int i=0;i<bestSchedules.Count-1;i++)
+            {
+                penalties.Add(GetPenaltiesFromSchedule(bestSchedules[i]));
+            }
+
+            for(int i=0;i<bestSchedules.Count;i++)
+            {
+                deltas.Add(GetDeltasList(bestSchedules[i], penalties, sumPenalties)); 
+            }
+
+            return deltas;
+        }
+
+        public List<int> GetPenaltiesFromSchedule(ScheduleViewModel schedule)
+        {
+            List<int> penalties = new List<int>();
+
+
+            ScheduleViewModel scheduleView = new ScheduleViewModel()
+            {
+                operations = schedule.operations.OrderBy(p => p.Id).ToList()
+            };
+
+
+            for(int i=0;i<scheduleView.operations.Count;i++)
+            {
+                penalties.Add(scheduleView.operations[i].Penalty);
+
+            }
+
+            return penalties;
+        }
+
+        public List<int> GetDeltasList(ScheduleViewModel schedule, List<List<int>> penalties, List<int> sumPenalties)
+        {
+            List<int> deltas = new List<int>();
+
+         
+            if(schedule.operations.Count!=0 && penalties.First().First()!=0)
+            {
+                for (int i = 0; i < penalties.Count; i++)
+                {
+                    for (int j = 0; j < schedule.operations.Count; j++)
+                    {
+                        schedule.operations.Where(p => p.Id == j + 1).First().Penalty = penalties[i][j];
+                    }
+                    deltas.Add(schedule.SummmaryPenalty - sumPenalties[i]);
+                }
+
+
+                int sum = 0;
+                for (int i = 0; i < penalties.Count; i++)
+                {
+                    sum += deltas[i];
+                }
+
+                deltas.Add(sum);
+
+            }
+            return deltas;
+        }
+
+        //public List<ScheduleViewModel> Answer(List<List<int>> deltas, List<ScheduleViewModel> bestSchedules)
+        //{
+        //    List<int> indexes = new List<int>();
+        //    List<ScheduleViewModel> schedules = new List<ScheduleViewModel>();
+
+        //    if (deltas.First().Count!=0)
+        //    {
+        //        int min = deltas.First()[deltas.First().Count - 1];
+
+        //        for (int i = 0; i < deltas.Count; i++)
+        //        {
+        //            if(deltas[i][deltas.First().Count - 1]<=min)
+        //            {
+        //                min = deltas[i][deltas.First().Count - 1];
+        //            }
+        //        }
+
+        //        for (int i = 0; i < deltas.Count; i++)
+        //        {
+        //            if (deltas[i][deltas.First().Count - 1] == min)
+        //            {
+        //                indexes.Add(i);
+        //            }
+        //        }
+
+        //        for(int i=0;i<indexes.Count;i++)
+        //        {
+        //            schedules.Add(bestSchedules[indexes[i]]);
+        //        }
+
+        //    }
+        //    return schedules;
+        //}
     }
 }
