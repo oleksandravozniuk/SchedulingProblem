@@ -24,12 +24,7 @@ namespace SchedulingProblem.Models
         public AlgoGenerator AlgoGenerator = new AlgoGenerator();
 
         public RandomInputViewModel()
-        {
-            //if(Schedule[0].operations.Count==0 && NumberOfElements==0)
-            //{
-            //    Schedule = MakeSchedule();
-            //}
-        }
+        {}
 
        
 

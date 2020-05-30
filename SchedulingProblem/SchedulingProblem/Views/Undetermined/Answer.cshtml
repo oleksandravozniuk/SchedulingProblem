@@ -1,17 +1,67 @@
 ﻿@using SchedulingProblem.Models;
-@model List<ScheduleViewModel>
+@model UndeterminedResultViewModel
 
-<h3>Answer</h3>
-<p>Оптимальні розклади</p>
-<div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
 
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        <div>
-            @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model[i])
+
+<div class="container">
+    <br />
+    <br />
+    <hr />
+    <h2 style="padding:10px;text-align:center">Result</h2>
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-sm">
+            <br />
+            <h3>Deltas</h3>
+            <p>Рядки - розклади. стовпці - критерії (останній стовпець сумарне значення дельти по розкладу).</p>
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+
+
+                <div>
+                    @await Html.PartialAsync("~/Views/Undetermined/DeltaView.cshtml", Model.Deltas)
+                </div>
+
+                <br />
+
+            </div>
+
+        </div>
+        <div class="col-sm">
+
+
+            <h3>Answer</h3>
+            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+
+                <br />
+                <div style="width:455px;">
+                    <div>
+                        <span>---------Number of schedule--------</span>
+                    </div>
+                    <table class="table">
+                        @for (int i = 0; i < Model.ResultSchedules.Count; i++)
+                        {
+                            <tr>
+                                <td><p> @(Model.ResultSchedules[i] + 1)</p></td>
+
+                            </tr>
+
+                        }
+
+
+                    </table>
+
+                </div>
+
+
+
+            </div>
+
         </div>
 
-        <br />
-    }
+
+    </div>
 </div>
+
 

@@ -119,3 +119,4 @@ C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProble
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Undetermined\ScheduleInput.cshtml.g.cs
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Undetermined\DeltaView.cshtml.g.cs
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Undetermined\Answer.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Determined\Answer.cshtml.g.cs

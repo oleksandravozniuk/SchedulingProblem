@@ -51,6 +51,8 @@
             {
                 @for (int i = 0; i < Model.NumberOfPenalties; i++)
                 {
+                    <p>S @(i + 1)</p>
+                    <br />
                     <div>@await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.Schedule[i]);</div>
                     <br />
                 }
@@ -104,6 +106,8 @@
                 {
                     @for (int i = 0; i < Model.NumberOfPenalties; i++)
                     {
+                        <p>S @(i + 1)</p>
+                        <br />
                         <div>
                             @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo1(Model.Schedule[i]))
                         </div>
@@ -126,6 +130,8 @@
                 {
                     @for (int i = 0; i < Model.NumberOfPenalties; i++)
                     {
+                        <p>S @(i + 1)</p>
+                        <br />
                         <div>
                             @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo2(Model.Schedule[i]))
                         </div>
@@ -151,6 +157,8 @@
                 {
                     @for (int i = 0; i < Model.NumberOfPenalties; i++)
                     {
+                        <p>S @(i + 1)</p>
+                        <br />
                         <div>
                             @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo3(Model.Schedule[i]))
                         </div>
@@ -169,6 +177,8 @@
                 {
                     @for (int i = 0; i < Model.NumberOfPenalties; i++)
                     {
+                        <p>S @(i + 1)</p>
+                        <br />
                         <div>
                             @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.MakeAlgo4(Model.Schedule[i]))
                         </div>
@@ -249,7 +259,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <br />
     <br />
@@ -262,16 +271,15 @@
         <div class="col-sm">
             <br />
             <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
-                @if (Model.NumberOfPenalties > 0)
+                @for (int i = 0; i < Model.NumberOfPenalties + 1; i++)
                 {
-                    @for (int i = 0; i < Model.NumberOfPenalties + 1; i++)
-                    {
-                        <div>
-                            @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.BestSchedules(Model.Schedule)[i])
-                        </div>
+                    <p>S @(i + 1)</p>
+                    <br />
+                    <div>
+                        @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model.AlgoGenerator.BestSchedules(Model.Schedule)[i])
+                    </div>
 
-                        <br />
-                    }
+                    <br />
                 }
             </div>
 
@@ -280,35 +288,10 @@
     </div>
 </div>
 
-
-
-<div class="container">
-    <br />
-    <br />
-    <hr />
-    <h2 style="padding:10px;text-align:center">Deltas</h2>
-    <hr />
-    <br />
-
-    <div class="row">
-        <div class="col-sm">
-            <br />
-            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
-
-
-                <div>
-                    @if (Model.NumberOfPenalties > 0)
-                    {
-                        @await Html.PartialAsync("~/Views/Undetermined/DeltaView.cshtml", Model.AlgoGenerator.Deltas(Model.AlgoGenerator.BestSchedules(Model.Schedule)))
-                    }
-                </div>
-
-                <br />
-
-            </div>
-
-        </div>
-
-    </div>
+<br />
+<div>
+    @await Html.PartialAsync("~/Views/Undetermined/Answer.cshtml", Model.AlgoGenerator.Answer(Model.Schedule))
 </div>
+
+<br />
 
