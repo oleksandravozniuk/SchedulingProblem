@@ -76,9 +76,9 @@ namespace SchedulingProblem.Controllers
                 configuration.DeadlineFrom.GetType() != typeof(int) || configuration.DeadlineTo.GetType() != typeof(int) ||
                     configuration.PenaltyFrom.GetType() != typeof(int) || configuration.PenaltyTo.GetType() != typeof(int) ||
                         configuration.NumberOfElements.GetType() != typeof(int) || configuration.DeadlineFrom>configuration.DeadlineTo ||
-                            configuration.PenaltyFrom>configuration.PenaltyTo)
+                            configuration.PenaltyFrom>configuration.PenaltyTo || configuration.NumberOfElements>10000)
             {
-                return View("Error", "All values must not be 0 or negative or not integer, also min bound of random value must be greater than max bound");
+                return View("Error", "All values must not be 0 or negative or not integer, also min bound of random value must be greater than max bound and max count of elements is 10000");
             }
             configuration.NumberOfPenalties = 1;
             configuration.Schedule = configuration.MakeSchedule();
@@ -166,9 +166,9 @@ namespace SchedulingProblem.Controllers
         [HttpPost]
         public IActionResult NumInput(int numOfElements)
         {
-            if (numOfElements <= 0 || numOfElements.GetType()!=typeof(int))
+            if (numOfElements <= 0 || numOfElements.GetType()!=typeof(int) || numOfElements > 10000)
             {
-                return View("Error", "The number of schedules cannot be 0 or negative or not integer");
+                return View("Error", "The number of elements cannot be 0 or negative or not integer or greater than 10000");
             }
             ManualInputViewModel manual = new ManualInputViewModel
             {
@@ -214,7 +214,6 @@ namespace SchedulingProblem.Controllers
                         return View("Error", "Deadlines or Penalties cannot be 0 or negative or not integer");
 
                 operations[i].Id = i + 1;
-
             }
             ManualInputViewModel manual = new ManualInputViewModel
             {

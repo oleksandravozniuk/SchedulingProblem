@@ -3,16 +3,16 @@
 
 <h3>Answer</h3>
 <p>Best Schedules</p>
-<div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
 
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        <div>
-            @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model[i])
-        </div>
 
-        <br />
-    }
-</div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            
+                @await Html.PartialAsync("~/Views/AlgoOutputs/ScheduleOutput.cshtml", Model[i])
+            
+        }
+
+   
+
 
 

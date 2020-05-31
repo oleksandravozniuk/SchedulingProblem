@@ -124,12 +124,12 @@
     <div class="row">
         <div class="col-sm">
             <br />
-            <div style="overflow-y:auto; overflow-x:auto; height:440px;width:460px;display: flex;justify-content: space-between;">
+            <div style="overflow-y:scroll; overflow-x:hidden; height:440px;width:460px;display: flex;justify-content: space-between;">
                 @if (Model.Schedule[0].operations.Count != 0)
                 {
-                    <div>
+                    
                         @await Html.PartialAsync("~/Views/Determined/Answer.cshtml", Model.AlgoGenerator.BestSchedulesDetermined(Model.Schedule[0]))
-                    </div>
+                    
                 }
 
 
