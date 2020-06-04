@@ -117,25 +117,26 @@
     <br />
     <br />
     <hr />
-    <h2 style="padding:10px;text-align:center">Best Schedules</h2>
+    <h2 style="padding:10px;text-align:center">The Best Schedules</h2>
     <hr />
     <br />
 
     <div class="row">
         <div class="col-sm">
             <br />
-            <div style="overflow-y:scroll; overflow-x:hidden; height:440px;width:460px;display: flex;justify-content: space-between;">
+           
                 @if (Model.Schedule[0].operations.Count != 0)
                 {
                     
-                        @await Html.PartialAsync("~/Views/Determined/Answer.cshtml", Model.AlgoGenerator.BestSchedulesDetermined(Model.Schedule[0]))
+                    @await Html.PartialAsync("~/Views/Determined/Answer.cshtml", Model.AlgoGenerator.BestSchedulesDetermined(Model.Schedule[0]))
                     
+
                 }
 
 
                 <br />
 
-            </div>
+           
 
         </div>
 

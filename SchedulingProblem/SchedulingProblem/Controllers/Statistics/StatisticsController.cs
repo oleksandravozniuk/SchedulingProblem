@@ -28,19 +28,33 @@ namespace SchedulingProblem.Controllers.Statistics
                     PenaltyFrom = 1,
                     PenaltyTo = 10000,
                     DeadlineFrom = 1,
-                    DeadlineTo = 1000,
+                    DeadlineTo = 10000,
                     NumberOfElements = i,
                     NumberOfPenalties = 1
                 };
+                List<int> algo1 = new List<int>();
+                List<int> algo2 = new List<int>();
+                List<int> algo3 = new List<int>();
+                List<int> algo4 = new List<int>();
+                for(int j =0;j<10;j++)
+                {
+
+                    algo1.Add(randomInput.AlgoGenerator.MakeAlgo1(randomInput.MakeSchedule().First()).SummmaryPenalty);
+                    algo2.Add(randomInput.AlgoGenerator.MakeAlgo2(randomInput.MakeSchedule().First()).SummmaryPenalty);
+                    algo3.Add(randomInput.AlgoGenerator.MakeAlgo3(randomInput.MakeSchedule().First()).SummmaryPenalty);
+                    algo4.Add(randomInput.AlgoGenerator.MakeAlgo4(randomInput.MakeSchedule().First()).SummmaryPenalty);
+                   
+                }
 
                 Precision precision = new Precision()
                 {
                     Step = i,
-                    Algo1 = randomInput.AlgoGenerator.MakeAlgo1(randomInput.MakeSchedule().First()).SummmaryPenalty,
-                    Algo2 = randomInput.AlgoGenerator.MakeAlgo2(randomInput.MakeSchedule().First()).SummmaryPenalty,
-                    Algo3 = randomInput.AlgoGenerator.MakeAlgo3(randomInput.MakeSchedule().First()).SummmaryPenalty,
-                    Algo4 = randomInput.AlgoGenerator.MakeAlgo4(randomInput.MakeSchedule().First()).SummmaryPenalty,
+                    Greedy1 = algo1.Average(),
+                    Greedy2 = algo2.Average(),
+                    Greedy3 = algo3.Average(),
+                    Greedy4 = algo4.Average(),
                 };
+               
                 precisions.Add(precision);
             }
            
@@ -59,10 +73,10 @@ namespace SchedulingProblem.Controllers.Statistics
                 Precision time = new Precision()
                 {
                     Step = i,
-                    Algo1 = CountAlgoTime(1,i),
-                    Algo2 = CountAlgoTime(2,i),
-                    Algo3 = CountAlgoTime(3,i),
-                    Algo4 = CountAlgoTime(4,i)
+                    Greedy1 = CountAlgoTime(1,i),
+                    Greedy2 = CountAlgoTime(2,i),
+                    Greedy3 = CountAlgoTime(3,i),
+                    Greedy4 = CountAlgoTime(4,i)
                 };
                 times.Add(time);
             }
@@ -80,10 +94,10 @@ namespace SchedulingProblem.Controllers.Statistics
                 Precision time = new Precision()
                 {
                     Step = i,
-                    Algo1 = CountAlgoTime(1, i),
-                    Algo2 = 0,
-                    Algo3 = 0,
-                    Algo4 = 0
+                    Greedy1 = CountAlgoTime(1, i),
+                    Greedy2 = 0,
+                    Greedy3 = 0,
+                    Greedy4 = 0
                 };
                 times.Add(time);
             }
@@ -103,10 +117,10 @@ namespace SchedulingProblem.Controllers.Statistics
                 Precision time = new Precision()
                 {
                     Step = i,
-                    Algo1 = 0,
-                    Algo2 = CountAlgoTime(2, i),
-                    Algo3 = 0,
-                    Algo4 = 0
+                    Greedy1 = 0,
+                    Greedy2 = CountAlgoTime(2, i),
+                    Greedy3 = 0,
+                    Greedy4 = 0
                 };
                 times.Add(time);
             }
@@ -126,10 +140,10 @@ namespace SchedulingProblem.Controllers.Statistics
                 Precision time = new Precision()
                 {
                     Step = i,
-                    Algo1 = 0,
-                    Algo2 = 0,
-                    Algo3 = CountAlgoTime(3, i),
-                    Algo4 = 0
+                    Greedy1 = 0,
+                    Greedy2 = 0,
+                    Greedy3 = CountAlgoTime(3, i),
+                    Greedy4 = 0
                 };
                 times.Add(time);
             }
@@ -149,10 +163,10 @@ namespace SchedulingProblem.Controllers.Statistics
                 Precision time = new Precision()
                 {
                     Step = i,
-                    Algo1 = 0,
-                    Algo2 = 0,
-                    Algo3 = 0,
-                    Algo4 = CountAlgoTime(4, i)
+                    Greedy1 = 0,
+                    Greedy2 = 0,
+                    Greedy3 = 0,
+                    Greedy4 = CountAlgoTime(4, i)
                 };
                 times.Add(time);
             }
@@ -175,10 +189,42 @@ namespace SchedulingProblem.Controllers.Statistics
             
             switch(numOfAlgo)
             {
-                case 1: _ = randomInput.AlgoGenerator.MakeAlgo1(randomInput.MakeSchedule().First());break;
-                case 2: _ = randomInput.AlgoGenerator.MakeAlgo2(randomInput.MakeSchedule().First()); break;
-                case 3: _ = randomInput.AlgoGenerator.MakeAlgo3(randomInput.MakeSchedule().First()); break;
-                case 4: _ = randomInput.AlgoGenerator.MakeAlgo4(randomInput.MakeSchedule().First()); break;
+                case 1:
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            _ = randomInput.AlgoGenerator.MakeAlgo1(randomInput.MakeSchedule().First());
+                        }
+                        break;
+                    } 
+                case 2:
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            _ = randomInput.AlgoGenerator.MakeAlgo2(randomInput.MakeSchedule().First());
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                _ = randomInput.AlgoGenerator.MakeAlgo3(randomInput.MakeSchedule().First());
+                            }
+                            break;
+                        }
+                    }
+                case 4:
+                    {
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                _ = randomInput.AlgoGenerator.MakeAlgo4(randomInput.MakeSchedule().First());
+                            }
+                            break;
+                        }
+                    }
             }
 
             DateTime moment2 = DateTime.Now;//time after running
@@ -187,5 +233,168 @@ namespace SchedulingProblem.Controllers.Statistics
 
             return diff.TotalMilliseconds;
         }
+
+        [HttpGet]
+        [Route("Undetermined")]
+        public JsonResult Undetermined()
+        {
+            List<Undetermined> undetermineds = new List<Undetermined>();
+
+            for (int i = 2; i < 100; i += 1)
+            {
+                
+                RandomInputViewModel randomInput = new RandomInputViewModel()
+                {
+                    PenaltyFrom = 1,
+                    PenaltyTo = 10000,
+                    DeadlineFrom = 1,
+                    DeadlineTo = 90,
+                    NumberOfElements = 90,
+                    NumberOfPenalties = i
+                };
+
+                double percents;
+                List<int> list = new List<int>();
+                for (int k = 1;k<10;k++)
+                {
+                    int summaryPenaltyCount = 0;
+                    
+                    
+
+                    for (int j = 0; j < 100; j++)
+                    {
+
+                        UndeterminedResultViewModel undeterminedResult = randomInput.AlgoGenerator.Answer(randomInput.MakeSchedule());
+
+                        if (undeterminedResult.ResultSchedules.Last() == i)
+                        {
+                            summaryPenaltyCount++;
+                        }
+
+                        
+
+                    }
+                    list.Add(summaryPenaltyCount);
+
+                }
+
+                percents = list.Average();
+
+                Undetermined undetermined = new Undetermined()
+                {
+                    Step = i,
+                    Percents = percents
+                };
+
+                undetermineds.Add(undetermined);
+            }
+
+            return Json(undetermineds);
+        }
+
+        [HttpGet]
+        [Route("Undetermined2")]
+        public JsonResult Undetermined2()
+        {
+            List<Undetermined> undetermineds = new List<Undetermined>();
+
+            for (int i = 1; i < 30; i += 1)
+            {
+
+                RandomInputViewModel randomInput = new RandomInputViewModel()
+                {
+                    PenaltyFrom = 1,
+                    PenaltyTo = 10000,
+                    DeadlineFrom = 1,
+                    DeadlineTo = 30,
+                    NumberOfElements = i,
+                    NumberOfPenalties = 10
+                };
+
+                double percents;
+                List<int> list = new List<int>();
+                for (int k = 1; k < 10; k++)
+                {
+                    int summaryPenaltyCount = 0;
+
+
+
+                    for (int j = 0; j < 100; j++)
+                    {
+
+                        UndeterminedResultViewModel undeterminedResult = randomInput.AlgoGenerator.Answer(randomInput.MakeSchedule());
+
+                        if (undeterminedResult.ResultSchedules.Last() == 10)
+                        {
+                            summaryPenaltyCount++;
+                        }
+
+
+
+                    }
+                    list.Add(summaryPenaltyCount);
+
+                }
+
+                percents = list.Average();
+
+                Undetermined undetermined = new Undetermined()
+                {
+                    Step = i,
+                    Percents = percents
+                };
+
+                undetermineds.Add(undetermined);
+            }
+
+            return Json(undetermineds);
+        }
+
+
+        [HttpGet]
+        [Route("UndeterminedTime")]
+        public JsonResult UndeterminedTime()
+        {
+            List<Undetermined> undetermineds = new List<Undetermined>();
+
+            for (int i = 1; i < 50; i += 1)
+            {
+
+                RandomInputViewModel randomInput = new RandomInputViewModel()
+                {
+                    PenaltyFrom = 1,
+                    PenaltyTo = 10000,
+                    DeadlineFrom = 1,
+                    DeadlineTo = 90,
+                    NumberOfElements = 90,
+                    NumberOfPenalties = i
+                };
+
+                DateTime moment1;
+                DateTime moment2;
+                double diff = 0;
+
+                for (int j = 0; j < 100; j++)
+                {
+                    moment1 = DateTime.Now;//first time
+                    _ = randomInput.AlgoGenerator.Answer(randomInput.MakeSchedule());
+                    moment2 = DateTime.Now;//time after running
+
+                    diff += moment2.Subtract(moment1).TotalMilliseconds;//diff between first and second times
+                    
+                }
+                
+                Undetermined undetermined = new Undetermined()
+                {
+                    Step = i,
+                    Percents = diff
+                };
+
+                undetermineds.Add(undetermined);
+            }
+
+            return Json(undetermineds);
+        }
     }
+
 }

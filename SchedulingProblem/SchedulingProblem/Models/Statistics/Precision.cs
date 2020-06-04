@@ -8,9 +8,9 @@ namespace SchedulingProblem.Models.Statistics
     public class Precision
     {
         public int Step { get; set; }
-        public double Algo1 { get; set; }
-        public double Algo2 { get; set; }
-        public double Algo3 { get; set; }
-        public double Algo4 { get; set; }
+        public double Greedy1 { get; set; }
+        public double Greedy2 { get; set; }
+        public double Greedy3 { get; set; }
+        public double Greedy4 { get; set; }
     }
 }

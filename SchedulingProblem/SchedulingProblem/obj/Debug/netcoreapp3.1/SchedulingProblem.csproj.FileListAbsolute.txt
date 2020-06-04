@@ -127,3 +127,6 @@ C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProble
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Time2.cshtml.g.cs
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Time3.cshtml.g.cs
 C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Time4.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Undetermined.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Undetermined2.cshtml.g.cs
+C:\Users\Oleksandra\Desktop\SchedulingProblem\SchedulingProblem\SchedulingProblem\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\UndeterminedTime.cshtml.g.cs

@@ -28,25 +28,27 @@
 
     function PopulationChart5(data) {
         var dataArray = [
-            ['Step', 'Algo3']
+            ['Step', 'Greedy3']
         ];
         $.each(data, function(i, item) {
-            dataArray.push([item.step, item.algo3]);
+            dataArray.push([item.step, item.greedy3]);
         });
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
-            title: 'Ratio of number of works to time of execution',
+            title: 'Ratio of number of jobs to time of execution',
             chartArea: {
                 width: '50%'
             },
             colors: ['#ffab91'],
             hAxis: {
-                title: 'Number of works',
+                title: 'Number of jobs',
                 minValue: 0
             },
             vAxis: {
-                title: 'Time Execution (ms)'
-            }
+                title: 'Time of Execution (ms)',
+                viewWindow: {min: 0}
+            },
+            curveType: 'function'
         };
         var chart = new google.visualization.LineChart(document.getElementById('chart5_div'));
 
